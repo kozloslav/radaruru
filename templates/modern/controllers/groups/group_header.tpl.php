@@ -56,7 +56,16 @@
         </span>
     <?php } ?>
 </h1>
-        <a href="<?php print_r($group['url_market']); ?>"> <?php print_r($group['url_market']); ?></a>
+        <?php if (!empty($group['url_market'])) {
+            $raw_m = trim($group['url_market']);
+            $mh = preg_match('#^https?://#i', $raw_m) ? $raw_m : 'https://' . $raw_m;
+            $md = preg_replace('#^https?://(www\.)?#i', '', rtrim($mh, '/'));
+        ?>
+            <a class="r-group-ext-link" href="<?php echo htmlspecialchars($mh); ?>" target="_blank" rel="nofollow noopener">
+                <?php html_svg_icon('solid', 'external-link-alt'); ?>
+                <?php echo htmlspecialchars($md); ?>
+            </a>
+        <?php } ?>
         </div>
     </div>
     </div>

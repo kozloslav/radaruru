@@ -68,122 +68,75 @@
         $ctype_name = !empty($item['ctype']['name']) ? $item['ctype']['name'] : '';
         $is_inactive = isset($item['is_pub']) && $item['is_pub'] < 1;
         $item_url = $item['url'];
-        $short_title = mb_substr($item['title'], 0, 80, 'UTF-8');
-        if (mb_strlen($item['title'], 'UTF-8') > 80) { $short_title .= '...'; }
-        $mobile_title = mb_substr($item['title'], 0, 40, 'UTF-8');
-        if (mb_strlen($item['title'], 'UTF-8') > 40) { $mobile_title .= '...'; }
     ?>
-    <div class="content_list_item <?php echo $ctype_name; ?>_list_item r-content_list_item clearfix<?php if ($is_inactive){ ?> item--inactive<?php } ?>" data-link="<?php echo $item_url; ?>">
-        <div class="bar-info r-mobile">
-            <div class="bar">
-                <div class="r-date">
+    <div class="card-item r-content_list_item <?php echo $ctype_name; ?>_list_item<?php if ($is_inactive){ ?> item--inactive<?php } ?>" data-link="<?php echo $item_url; ?>">
+
+        <div class="card-media">
+            <div class="r-img">
+                <?php if (!empty($item['image'])){ ?>
+                    <a href="<?php echo $item_url; ?>"><?php echo $item['image']; ?></a>
+                <?php } ?>
+                <?php if ($is_inactive) { ?><div class="r-img__inactive-overlay">не активно</div><?php } ?>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="card-meta">
+                <span class="card-date">
                     <?php html_svg_icon('solid', 'calendar-alt'); ?>
                     <?php echo html_date($item['date_pub']); ?>
-                </div>
+                </span>
             </div>
-        </div>
 
-        <div class="r-content_list">
-            <div class="icms-content-left-column">
-                <div class="r-img">
-                    <?php if(!empty($item['image'])){ ?>
-                        <a href="<?php echo $item_url; ?>">
-                            <?php echo $item['image']; ?>
-                        </a>
-                    <?php } ?>
-                    <?php if ($is_inactive) { ?>
-                    <div class="r-img__inactive-overlay">не активно</div>
-                    <?php } ?>
-                </div>
+            <?php
+            $search_raw = html_entity_decode($item['title'], ENT_QUOTES | ENT_HTML5, 'UTF-8');
+            $mob_title = mb_strlen($search_raw, 'UTF-8') > 56
+                ? mb_substr($search_raw, 0, 53, 'UTF-8') . '…'
+                : $search_raw;
+            ?>
+            <a class="card-title" href="<?php echo $item_url; ?>">
+                <span class="ct-d"><?php echo htmlspecialchars($item['title']); ?></span><span class="ct-m"><?php echo htmlspecialchars($mob_title); ?></span>
+            </a>
+
+            <?php
+            $desc = '';
+            foreach ($item['fields'] as $value) {
+                if ($value) { $desc = trim(strip_tags($value)); break; }
+            }
+            if ($desc) {
+                $trimmed = mb_substr($desc, 0, 120, 'UTF-8');
+                if (mb_strlen($desc, 'UTF-8') > 120) {
+                    $last = mb_strrpos($trimmed, ' ', 0, 'UTF-8');
+                    $trimmed = ($last ? mb_substr($trimmed, 0, $last, 'UTF-8') : $trimmed) . '…';
+                }
+                echo '<p class="card-desc">' . htmlspecialchars($trimmed) . '</p>';
+            }
+            ?>
+
+            <?php if (isset($item['price']) || isset($item['old_price'])) { ?>
+            <div class="card-price-row">
+                <?php if (isset($item['price'])) { ?><span class="r-price"><?php echo $item['price']; ?>₽</span><?php } ?>
+                <?php if (isset($item['old_price'])) { ?><span class="r-old_price"><?php echo $item['old_price']; ?>₽</span><?php } ?>
             </div>
-            <div class="icms-content-right-column">
-                <div class="bar-info r-nmobile">
-                    <div class="bar">
-                        <div class="r-date">
-                            <?php html_svg_icon('solid', 'calendar-alt'); ?>
-                            <?php echo html_date($item['date_pub']); ?>
-                        </div>
+            <?php } ?>
+
+            <div class="card-actions">
+                <div class="card-actions-left">
+                    <div class="r-dist-btn r-list-btn ajax-modal"
+                        data-url="<?php echo urlencode('https://radaru.ru' . $item_url); ?>"
+                        data-title="<?php echo urlencode($item['title']); ?>"
+                        data-style="sm"
+                        data-item-id="<?php echo $item['id']; ?>">
+                        <span class="r-list-icon"><?php html_svg_icon('solid', 'share'); ?></span>
                     </div>
                 </div>
-
-                <div class="r-nmobile">
-                    <a class="r-content_title" href="<?php echo $item_url; ?>">
-                        <?php echo $short_title; ?>
-                    </a>
-                </div>
-
-                <div class="r-mobile">
-                    <a class="r-content_title" href="<?php echo $item_url; ?>">
-                        <?php echo $mobile_title; ?>
-                    </a>
-                </div>
-
-                <div class="r-nmobile">
-                    <?php foreach($item['fields'] as $field => $value){ ?>
-                        <?php if (!$value) { continue; } ?>
-                        <?php
-                            $text = trim(strip_tags($value));
-                            $len = mb_strlen($text, 'UTF-8');
-                            if ($len > 120) {
-                                $trimmed = mb_substr($text, 0, 120, 'UTF-8');
-                                $lastSpace = mb_strrpos($trimmed, ' ', 0, 'UTF-8');
-                                if ($lastSpace !== false) { $trimmed = mb_substr($trimmed, 0, $lastSpace, 'UTF-8'); }
-                                echo htmlspecialchars($trimmed . '...');
-                            } else {
-                                echo $value;
-                            }
-                        ?>
+                <div class="card-actions-right">
+                    <?php if (isset($item['sale_url'])) { ?>
+                        <a href="<?php echo $item['sale_url']; ?>" class="r-sale-url">К скидке</a>
+                    <?php } else { ?>
+                        <a href="<?php echo $item_url; ?>" class="r-sale-url">Подробнее</a>
                     <?php } ?>
                 </div>
-
-                <?php if (isset($item['sale_url'])) { ?>
-                <div class="price_market">
-                    <?php if (isset($item['price'])) { ?>
-                        <div class="r-price"><?php echo $item['price']; ?>₽</div>
-                    <?php } ?>
-                    <?php if (isset($item['old_price'])) { ?>
-                        <div class="r-old_price"><?php echo $item['old_price']; ?>₽</div>
-                    <?php } ?>
-                </div>
-                <?php } ?>
-
-                <div class="r-list-button r-nmobile">
-                    <div class="r-list-button-left">
-                        <div class="r-dist-btn r-list-btn ajax-modal"
-                            data-url="<?php echo urlencode('https://radaru.ru' . $item_url); ?>"
-                            data-title="<?php echo urlencode($item['title']); ?>"
-                            data-style="sm"
-                            data-item-id="<?php echo $item['id']; ?>">
-                            <span class="r-list-icon"><?php html_svg_icon('solid', 'share'); ?></span>
-                        </div>
-                    </div>
-                    <div class="r-list-button-right">
-                        <?php if (isset($item['sale_url'])) { ?>
-                            <a href="<?php echo $item['sale_url']; ?>" class="r-content_link r-sale-url">К скидке</a>
-                        <?php } else { ?>
-                            <a href="<?php echo $item_url; ?>" class="r-content_link r-sale-url">Подробнее</a>
-                        <?php } ?>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="r-list-button r-mobile">
-            <div class="r-list-button-left">
-                <div class="r-dist-btn r-list-btn ajax-modal"
-                     data-url="<?php echo urlencode('https://radaru.ru' . $item_url); ?>"
-                     data-title="<?php echo urlencode($item['title']); ?>"
-                     data-style="sm"
-                     data-item-id="<?php echo $item['id']; ?>">
-                    <span class="r-list-icon"><?php html_svg_icon('solid', 'share'); ?></span>
-                </div>
-            </div>
-            <div class="r-list-button-right">
-                <?php if (isset($item['sale_url'])) { ?>
-                    <a href="<?php echo $item['sale_url']; ?>" class="r-content_link r-sale-url">К скидке</a>
-                <?php } else { ?>
-                    <a href="<?php echo $item_url; ?>" class="r-content_link r-sale-url">Подробнее</a>
-                <?php } ?>
             </div>
         </div>
     </div>

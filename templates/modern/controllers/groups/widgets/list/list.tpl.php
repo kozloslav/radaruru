@@ -39,11 +39,6 @@ $this->addTplCSSFromContext('controllers/groups/styles');
                     </div>
                 <?php } ?>
             </div>
-            <?php if ($show_members_count) { ?>
-                <div class="actions text-muted ml-2">
-                    <?php echo $group['members_count'] ? html_spellcount($group['members_count'], LANG_GROUPS_MEMBERS_SPELLCOUNT) : '&mdash;'; ?>
-                </div>
-            <?php } ?>
         </div>
     <?php } ?>
 </div>

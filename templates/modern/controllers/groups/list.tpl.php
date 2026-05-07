@@ -15,71 +15,47 @@
     </p>
 <?php return; } ?>
 
-<?php
-    $index_first = $page * $perpage - $perpage + 1;
-    $index = 0;
-    $pos_colors = ['text-muted', 'text-warning','text-info', 'text-secondary'];
-?>
+<div class="r-market-grid">
 
-<div class="groups-list content_list striped-list mt-3 mt-md-4">
+    <?php foreach($groups as $group){
+        $group_url = href_to('groups', $group['slug']);
 
-    <?php foreach($groups as $group){ ?>
+        $raw_market = trim($group['url_market'] ?? '');
+        $market_href = '';
+        $market_display = '';
+        if ($raw_market) {
+            $market_href = preg_match('#^https?://#i', $raw_market) ? $raw_market : 'https://' . $raw_market;
+            $market_display = preg_replace('#^https?://(www\.)?#i', '', rtrim($market_href, '/'));
+        }
+    ?>
 
-        <div class="item content_list_item group_item media mb-3 align-items-center">
+    <div class="r-market-card" onclick="location.href='<?php echo $group_url; ?>'">
 
-            <?php if ($dataset_name == 'rating') { ?>
-                <div class="position">
-                    <?php $position = $index_first + $index; ?>
-                    <div class="position icms-svg-icon w-32 mr-2 text-center <?php echo isset($pos_colors[$position]) ? $pos_colors[$position] : $pos_colors[0]; ?>">
-                        <?php if (in_array($position, range(1, 3))){ ?>
-                            <?php html_svg_icon('solid', 'medal', 32); ?>
-                        <?php } else {  ?>
-                            <?php echo $position; ?>
-                        <?php } ?>
-                    </div>
-                </div>
-            <?php } ?>
-
+        <a class="r-market-card__logo" href="<?php echo $group_url; ?>" onclick="event.stopPropagation()">
             <?php if (!empty($fields['logo']) && $fields['logo']['is_in_list'] && $group['logo']){ ?>
-                <a class="icms-user-avatar p-3 d-flex mr-3" href="<?php echo href_to('groups', $group['slug']); ?>">
-                    <?php echo html_image($group['logo'], $fields['logo']['handler']->getOption('size_teaser'), $group['title']); ?>
-                </a>
+                <?php echo html_image($group['logo'], $fields['logo']['handler']->getOption('size_teaser'), $group['title']); ?>
+            <?php } else { ?>
+                <span class="r-market-card__initials"><?php echo mb_strtoupper(mb_substr($group['title'], 0, 2, 'UTF-8'), 'UTF-8'); ?></span>
             <?php } ?>
+        </a>
 
-            <div class="media-body p-3">
-                <?php if (!empty($fields['title']) && $fields['title']['is_in_list']){ ?>
-                    <div class="my-0 r-content_title">
-                        <a href="<?php echo href_to('groups', $group['slug']); ?>"><?php html($group['title']); ?></a>
-                        <?php if ($group['is_closed']) { ?>
-                            <span class="is_closed text-muted ml-2" title="<?php html(LANG_GROUP_IS_CLOSED_ICON); ?>" data-toggle="tooltip" data-placement="top">
-                                <?php html_svg_icon('solid', 'lock'); ?>
-                            </span>
-                        <?php } ?>
-                        </div>
-                <?php } ?>
-                <?php if (!empty($group['fields'])) { ?>
-                    <div class="fields mt-2">
-                        <?php foreach($group['fields'] as $field){ ?>
-                            <div class="field ft_<?php echo $field['type']; ?> f_<?php echo $field['name']; ?>">
-                                <?php if ($field['label_pos'] != 'none'){ ?>
-                                    <div class="title_<?php echo $field['label_pos']; ?>">
-                                        <?php echo $field['title'] . ($field['label_pos'] == 'left' ? ': ' : ''); ?>
-                                    </div>
-                                <?php } ?>
-                                <div class="value">
-                                    <?php echo $field['html']; ?>
-                                </div>
-                            </div>
-                        <?php } ?>
-                    </div>
+        <div class="r-market-card__body">
+            <a class="r-market-card__title" href="<?php echo $group_url; ?>" onclick="event.stopPropagation()">
+                <?php echo htmlspecialchars($group['title']); ?>
+                <?php if ($group['is_closed']){ ?><span class="r-market-lock"><?php html_svg_icon('solid', 'lock'); ?></span><?php } ?>
+            </a>
+
+            <div class="r-market-card__footer">
+                <?php if ($market_display){ ?>
+                    <a class="r-market-card__url" href="<?php echo htmlspecialchars($market_href); ?>" target="_blank" rel="nofollow noopener" onclick="event.stopPropagation()">
+                        <?php html_svg_icon('solid', 'external-link-alt'); ?>
+                        <?php echo htmlspecialchars($market_display); ?>
+                    </a>
                 <?php } ?>
             </div>
-
-
-
         </div>
 
-        <?php $index++; ?>
+    </div>
 
     <?php } ?>
 
