@@ -1,0 +1,33 @@
+name: Deploy to SpaceWeb
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  web-deploy:
+    name: Sync Files
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Sync via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          # ВОТ ТУТ ТЕПЕРЬ ПРАВИЛЬНЫЙ ПУТЬ:
+          server-dir: radaru/public_html/
+          # Исключаем мусор, даже если он случайно попал в гит
+          exclude: |
+            **/.git*
+            **/.git/**
+            **/node_modules/**
+            system/config/config.php
+            cache/**
+            sessions/**
+            upload/**
+            db_test.php

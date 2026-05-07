@@ -1,0 +1,9 @@
+/system/config/config.php
+/cache/*
+/upload/*
+/sessions/*
+/logs/*
+/tmp/*
+*.zip
+*.tar.gz
+.DS_Store

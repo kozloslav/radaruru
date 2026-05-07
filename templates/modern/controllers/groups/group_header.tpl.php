@@ -1,0 +1,69 @@
+<?php
+
+    $this->addMenuItems('group_tabs', $this->controller->getGroupTabs($group));
+    $this->addMenuItems('toolbar', $this->controller->getToolButtons($group));
+
+    $this->setPagePatternTitle($group);
+    if(!empty($filter_titles)){ $this->addToPageTitle(implode(', ', $filter_titles)); }
+    $this->setPagePatternDescription($group);
+    $this->setPagePatternH1($group);
+?>
+
+<?php if(!empty($group['fields']['cover']['is_in_item']) && $group['cover']){ ?>
+<div class="embed-responsive embed-responsive-36by9 icms-bg__cover mb-3" style="background-image: url(<?php echo html_image_src($group['cover'], $group['fields']['cover']['handler']->getOption('size_full'), true); ?>);">
+    <div class="icms-groups-g__header_counts px-3 py-2 position-absolute text-white small d-flex">
+        <div title="<?php echo LANG_RATING; ?>" data-toggle="tooltip" data-placement="top">
+            <?php html_svg_icon('solid', 'star'); ?>
+            <span><?php echo $group['rating']; ?></span>
+        </div>
+        <div class="ml-3" title="<?php echo LANG_GROUP_INFO_CREATED_DATE; ?>" data-toggle="tooltip" data-placement="top">
+            <?php html_svg_icon('solid', 'calendar-alt'); ?>
+            <span><?php echo string_date_age_max($group['date_pub'], true); ?></span>
+        </div>
+        <div class="ml-3" title="<?php echo LANG_GROUP_INFO_OWNER; ?>" data-toggle="tooltip" data-placement="top">
+            <?php html_svg_icon('solid', 'user'); ?>
+            <a class="text-white" href="<?php echo href_to('users', $group['owner_id']); ?>">
+                <?php html($group['owner_nickname']); ?>
+            </a>
+        </div>
+    </div>
+</div>
+<?php } ?>
+<div class="content_list_item">
+    <div class="r-content_list">
+    <div class="icms-content-left-column">
+    <?php if (!empty($group['fields']['logo']['is_in_item']) && $group['logo']){ ?>
+        <div class="r-img">
+            <?php echo html_image($group['logo'], $group['fields']['logo']['handler']->getOption('size_full'), $group['title']); ?>
+        </div>
+    <?php } ?>
+    </div>
+    <div class="icms-content-right-column outer_mark">
+        <div class="mark_title">
+<h1 class="d-flex align-items-center">
+
+    <?php if (!empty($group['fields']['title']['is_in_item'])){ ?>
+        <span>
+            <?php $this->pageH1(); ?>
+            <?php if (!empty($group['sub_title'])) { ?>
+                <span class="d-none d-lg-inline-block text-muted"> &middot; <?php html($group['sub_title']); ?></span>
+            <?php } ?>
+        </span>
+    <?php } ?>
+    <?php if ($group['is_closed']) { ?>
+        <span class="is_closed text-muted ml-2" title="<?php html(LANG_GROUP_IS_CLOSED_ICON); ?>">
+            <?php html_svg_icon('solid', 'lock'); ?>
+        </span>
+    <?php } ?>
+</h1>
+        <a href="<?php print_r($group['url_market']); ?>"> <?php print_r($group['url_market']); ?></a>
+        </div>
+    </div>
+    </div>
+</div>
+
+<?php if (!$group['is_closed'] || ($group['access']['is_member'] || $group['access']['is_moderator'])){ ?>
+<div class="card-header r-header">
+    <?php $this->menu('group_tabs', true, 'nav nav-tabs border-0', 6); ?>
+</div>
+<?php } ?>
