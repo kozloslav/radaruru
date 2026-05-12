@@ -1,127 +1,245 @@
 $ns-levels: 1,2,3,4,5,6,7,8,9,10;
 $comment-rating-size: 30px;
-.text-success.rate-up, .rate-down.text-danger {
-    color: $secondary  !important;
-}
-.rate-disabled {
-    color: $gray-300;
-}
+
+// ─── Системное (оставляем как было) ─────────────────────────────────────────
+
+.text-success.rate-up, .rate-down.text-danger { color: $secondary !important; }
+.rate-disabled { color: $gray-300; }
+
 .refresh_btn {
-    display: block;
-    position: fixed;
-    z-index: 100;
-    right: 0px;
-    top: 45%;
-    &.refresh_spin > svg {
-        animation: animate__comment-spin 2s infinite linear;
-    }
+    display: block; position: fixed; z-index: 100; right: 0; top: 45%;
+    &.refresh_spin > svg { animation: animate__comment-spin 2s infinite linear; }
 }
-@keyframes animate__comment-spin{0%{transform:rotate(0deg)}to{transform:rotate(359deg)}}
+@keyframes animate__comment-spin { 0% { transform: rotate(0deg) } to { transform: rotate(359deg) } }
+
 #wall_add_form, #comments_add_form {
     display: none;
-    > form {
-        > .textarea.form-control {
-            margin-bottom: $spacer;
-        }
-    }
+    > form > .textarea.form-control { margin-bottom: $spacer; }
 }
-.justify-content-between {
-    ~ #comments_add_form {
-        margin-top: $spacer;
-    }
-}
+.justify-content-between ~ #comments_add_form { margin-top: $spacer; }
+
 .icms-comments {
-    &__tabs {
-        &-tab {
-            position: absolute;
-            top: 0;
-            right: 0;
-        }
-    }
-    &-ns {
-        @each $level in $ns-levels{
-            &.ns-#{$level} {
-                margin-left: $spacer*$level*0.5;
-            }
-        }
-        @include media-breakpoint-up(lg) {
-            @each $level in $ns-levels{
-                &.ns-#{$level} {
-                    margin-left: calc(#{$comment-rating-size*$level} + #{$spacer*$level});
-                }
-            }
-        }
+    &__tabs-tab { position: absolute; top: 0; right: 0; }
+}
 
+// ─── Вложенность ─────────────────────────────────────────────────────────────
+
+.icms-comments-ns {
+    @each $level in $ns-levels {
+        &.ns-#{$level} { margin-left: #{$level * 12}px; }
+    }
+    @include media-breakpoint-up(lg) {
+        @each $level in $ns-levels {
+            &.ns-#{$level} { margin-left: #{$level * 28}px; }
+        }
     }
 }
 
-.comment {
-    .icms-user-avatar > img {
-        max-width: $spacer*1.25;
-        min-width: auto;
-        min-height: auto;
+// ─── Карточка комментария ─────────────────────────────────────────────────────
+
+.r-cmt {
+    // Затемнение плохих комментариев
+    &.bad { transition: opacity $transition-fade; &:hover { opacity: 1 !important; } }
+    &.bad6 { opacity: .1; } &.bad5 { opacity: .2; } &.bad4 { opacity: .35; }
+    &.bad3 { opacity: .5; } &.bad2 { opacity: .65; } &.bad1 { opacity: .8; }
+
+    + .r-cmt { margin-top: $spacer * 0.5; }
+
+    // Карточка
+    &__card {
+        background: $white;
+        border: 1px solid $gray-200;
+        border-radius: 14px;
+        padding: $spacer * 0.875 $spacer;
+        transition: box-shadow 0.18s ease;
+        &:hover { box-shadow: 0 2px 16px rgba($black, 0.06); }
     }
-    .icms-user-avatar.peer_online:after, .icms-user-avatar.peer_no_online:after {
-        bottom: -2px;
-        right: -2px;
-        border-width: 1px;
-        height: 10px;
-        width: 10px;
+
+    // Новый/выбранный (r-cmt--new — постоянный, selected-comment — добавляет JS)
+    &--new > &__card,
+    &.selected-comment > &__card {
+        border-left: 3px solid $primary;
+        border-radius: 0 14px 14px 0;
+        background: #fff9f5;
     }
-    .no_approved {
-        display: none !important;
+
+    // ── Шапка
+    &__head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: $spacer * 0.5;
+        margin-bottom: $spacer * 0.625;
     }
-}
-#comments_widget {
-    .bad {
-        transition: $transition-fade;
-        &:hover {
-            opacity: 1;
-        }
+
+    // Блок автора
+    &__author {
+        display: flex;
+        align-items: center;
+        gap: $spacer * 0.5;
+        min-width: 0;
+        flex: 1;
     }
-    .bad6{opacity:.1;}
-    .bad5{opacity:.2;}
-    .bad4{opacity:.35;}
-    .bad3{opacity:.5;}
-    .bad2{opacity:.65;}
-    .bad1{opacity:.8;}
-}
-.icms-comment {
-    &-html {
-        position: relative;
-        border-radius: $border-radius;
-        padding: $spacer;
-        background-color: $gray-100;
-        border: $border-width solid $border-color;
-        &:after, &:before {
+
+    // Аватар
+    &__ava {
+        flex-shrink: 0;
+        .icms-user-avatar {
             display: block;
-            position: absolute;
-            top: -10px;
-            left: 2.5rem;
-            width: 18px;
-            height: 10px;
-            pointer-events: none;
-            content: " ";
-            -webkit-clip-path: polygon(50% 0, 0% 100%, 100% 100%);
-            clip-path: polygon(50% 0, 0% 100%, 100% 100%);
-        }
-        &:before {
-            background-color: $border-color;
-        }
-        &:after {
-            background-color: $gray-100;
-            margin-top: 1px;
-        }
-        > *:last-child {
-            margin-bottom: 0;
+            position: relative;
+            img {
+                width: 36px;
+                height: 36px;
+                border-radius: 50%;
+                object-fit: cover;
+                display: block;
+                border: 2px solid $gray-200;
+            }
+            &.peer_online::after, &.peer_no_online::after {
+                content: '';
+                position: absolute;
+                bottom: 1px; right: 1px;
+                width: 9px; height: 9px;
+                border-radius: 50%;
+                border: 2px solid $white;
+            }
+            &.peer_online::after    { background: #22c55e; }
+            &.peer_no_online::after { background: $gray-400; }
         }
     }
-    &-rating {
-        min-width: $comment-rating-size;
+
+    // Мета (имя + дата)
+    &__meta {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+        min-width: 0;
+    }
+
+    &__name {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: $gray-900;
+        text-decoration: none;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        transition: color 0.15s;
+        &:hover   { color: $primary; text-decoration: none; }
+        &--op     { color: $primary; }
+        &--guest  { color: $gray-700; }
+    }
+
+    &__ip     { font-size: 0.75rem; color: $gray-400; margin-left: 0.25rem; }
+    &__target { font-size: 0.775rem; color: $gray-400; a { color: $primary; } }
+
+    &__date {
+        font-size: 0.75rem;
+        color: $gray-400;
+        display: flex;
+        align-items: center;
+        gap: 3px;
+    }
+    &__edited svg { width: 0.6em; height: 0.6em; opacity: 0.55; }
+
+    // Правая часть (рейтинг + якорь)
+    &__right {
+        display: flex;
+        align-items: center;
+        gap: $spacer * 0.375;
+        flex-shrink: 0;
+    }
+
+    &__anchor {
+        font-size: 0.775rem;
+        color: $gray-300;
+        text-decoration: none;
+        &:hover { color: $primary; text-decoration: none; }
+    }
+
+    // Рейтинг — горизонтальная пилюля как на карточках контента
+    &__rating {
+        display: inline-flex;
+        align-items: center;
+        gap: 2px;
+        background: $gray-100;
+        border: 1px solid $gray-200;
+        border-radius: 20px;
+        padding: 3px 8px;
+    }
+
+    &__rate-val {
+        font-size: 0.8125rem;
+        font-weight: 700;
+        min-width: 1.25rem;
+        text-align: center;
+        color: $gray-600;
+        &.positive { color: $primary; }   // оранжевый — как ↑ на картинке
+        &.negative { color: #3b82f6; }    // синий — как ↓ на картинке
+    }
+
+    &__rate-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 22px; height: 22px;
+        border-radius: 50%;
+        text-decoration: none;
+        color: $gray-400;
+        transition: background 0.13s, color 0.13s;
+        svg { width: 0.7em; height: 0.7em; }
+
+        &--up:hover   { background: rgba($primary, 0.12); color: $primary; }
+        &--down:hover { background: rgba(#3b82f6, 0.12); color: #3b82f6; }
+        &--dis        { opacity: 0.3; cursor: default; }
+    }
+
+    // ── Текст комментария
+    &__text {
+        font-size: 0.9375rem;
+        line-height: 1.65;
+        color: $gray-800;
+        word-break: break-word;
+        > *:last-child { margin-bottom: 0; }
+
+        // Сохраняем стиль пузыря если CMS его добавляет
+        &.icms-comment-html {
+            border-radius: $border-radius;
+            padding: $spacer * 0.75;
+            background: $gray-100;
+            border: $border-width solid $gray-200;
+        }
+    }
+
+    &__deleted {
+        display: flex; align-items: center; gap: $spacer * 0.375;
+        font-size: 0.875rem; color: $gray-400; font-style: italic; margin: 0;
+        svg { width: 0.85em; height: 0.85em; }
+    }
+
+    // ── Кнопки действий
+    &__actions {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 2px;
+        margin-top: $spacer * 0.5;
+        padding-top: $spacer * 0.5;
+        border-top: 1px solid $gray-100;
+    }
+
+    &__act {
+        display: inline-flex; align-items: center; gap: 0.3rem;
+        padding: 0.2rem 0.5rem;
+        font-size: 0.8rem; font-weight: 500;
+        color: $gray-400; border-radius: 6px; text-decoration: none;
+        transition: background 0.13s, color 0.13s;
+        svg { width: 0.8em; height: 0.8em; }
+        &:hover            { background: $gray-100; color: $gray-700; text-decoration: none; }
+        &.text-danger:hover  { background: rgba(#ef4444, 0.08); color: #ef4444; }
+        &.text-primary:hover { background: rgba($primary, 0.08); color: $primary; }
     }
 }
-.selected-comment {
-    .icms-comment-html {
-        box-shadow: $box-shadow;
-    }
-}
+
+// Скрываем данные неодобренных
+.r-cmt .no_approved { display: none !important; }

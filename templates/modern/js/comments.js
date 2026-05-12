@@ -235,7 +235,10 @@ icms.comments = (function ($) {
 
             icms.events.run('icms_comments_submit', result);
 
-        }, 'json');
+        }, 'json').fail(function(xhr) {
+            self.restoreForm(false);
+            self.error(xhr.responseJSON && xhr.responseJSON.message ? xhr.responseJSON.message : 'Ошибка отправки');
+        });
 
     };
 
@@ -625,6 +628,8 @@ icms.comments = (function ($) {
 
             value_block.removeAttr('class');
             value_block.addClass(result_class);
+        }).fail(function(){
+            $(rating_block).removeClass('is-busy '+result_class);
         });
 
         return false;
