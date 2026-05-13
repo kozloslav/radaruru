@@ -89,17 +89,13 @@ $this->addTplJSName('comments');
                 <?php } ?>
                 <?php $this->block('comments_add_form'); ?>
                 <?php echo html_wysiwyg('content', '', $editor_params['editor'], $editor_params['options']); ?>
-                <div class="buttons row justify-content-between">
-                    <div class="col">
-                        <?php echo html_button(LANG_SEND, 'submit', '', ['class' => 'button-add button-update btn-primary']); ?>
-                        <?php echo html_button(LANG_CANCEL, 'cancel', '', ['class'=>'btn-secondary button-cancel']); ?>
-                    </div>
-                    <div class="col-auto">
-                        <button class="button btn button-preview btn-info" name="preview" type="button">
-                            <?php html_svg_icon('solid', 'eye'); ?>
-                            <span class="d-none d-lg-inline-block"><?php echo LANG_PREVIEW; ?></span>
-                        </button>
-                    </div>
+                <div class="r-form-btns">
+                    <?php echo html_button(LANG_SEND, 'submit', '', ['class' => 'button-add button-update btn-primary']); ?>
+                    <?php echo html_button(LANG_CANCEL, 'cancel', '', ['class' => 'btn-secondary button-cancel']); ?>
+                    <button class="button btn btn-info button-preview r-btn-preview" name="preview" type="button">
+                        <?php html_svg_icon('solid', 'eye'); ?>
+                        <span><?php echo LANG_PREVIEW; ?></span>
+                    </button>
                 </div>
             </form>
             <?php $this->block('comments_add_form_after'); ?>
