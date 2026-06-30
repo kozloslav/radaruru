@@ -42,7 +42,7 @@
                     $navbar_class[] = $widget->options['class'];
                 }
                 if (empty($widget->options['navbar_expand'])) {
-                    $navbar_class[] = 'flex-row icms-navbar-expanded';
+                    $navbar_class[] = 'flex-row flex-nowrap icms-navbar-expanded';
                 }
 
                 $this->menu(

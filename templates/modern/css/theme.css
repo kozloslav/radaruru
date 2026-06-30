@@ -13138,3 +13138,113 @@ body,
     }
 }
 /* ============ END UNIFIED IMPROVEMENTS ============ */
+
+/* ============ Main Nav Menu ============ */
+.r-menu-nav {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px 0;
+    position: relative;
+    gap: 4px;
+}
+
+.r-menu-track {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    flex: 1;
+    padding: 2px 0;
+}
+
+.r-menu-track::-webkit-scrollbar {
+    display: none;
+}
+
+.menu-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1;
+    padding: 8px 16px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.12);
+    color: #e0e0e0;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: background .18s, color .18s, border-color .18s, transform .12s;
+}
+
+.menu-item:hover {
+    background: rgba(255,255,255,0.22);
+    color: #fff;
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+
+.menu-item.active,
+.menu-item.eew.active {
+    background: #f18418;
+    color: #fff;
+    border-color: #f18418;
+}
+
+.menu-item-back {
+    background: rgba(241,132,24,0.2);
+    border-color: rgba(241,132,24,0.4);
+    color: #f18418;
+}
+
+.r-menu-counter {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 9px;
+    background: #f18418;
+    color: #fff;
+    line-height: 1;
+}
+
+.r-menu-arrow {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.6);
+    cursor: pointer;
+    transition: background .18s, color .18s;
+    padding: 0;
+}
+
+.r-menu-arrow--visible {
+    display: flex;
+}
+
+.r-menu-arrow:hover {
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+}
+
+.r-menu-arrow svg {
+    width: 12px;
+    height: 12px;
+}
+/* ============ END Main Nav Menu ============ */

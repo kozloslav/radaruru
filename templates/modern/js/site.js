@@ -12,21 +12,26 @@
         });
     }
 
-    /* ---- Owl Carousel navigation ---- */
-    function initCarousels() {
-        if (typeof $ === 'undefined' || !$.fn.owlCarousel) return;
-        document.querySelectorAll('#js-carousel').forEach(function (el) {
-            var $el = $(el);
-            var owl = $el.find('.owl-carousel').owlCarousel();
-            $el.find('.js-prev').on('click', function () { owl.trigger('prev.owl.carousel'); });
-            $el.find('.js-next').on('click', function () { owl.trigger('next.owl.carousel'); });
+    /* ---- Menu nav scroll ---- */
+    function initMenuNav() {
+        document.querySelectorAll('#js-menu-nav').forEach(function (nav) {
+            var track = nav.querySelector('.r-menu-track');
+            var prev  = nav.querySelector('.r-menu-prev');
+            var next  = nav.querySelector('.r-menu-next');
+            if (!track) return;
 
-            function updateNav() {
-                var show = $el.find('.owl-stage').width() / $(window).width() > 0.84 && $(window).width() > 767;
-                $el.find('.js-prev, .js-next').css('display', show ? 'inline-block' : 'none');
+            function updateArrows() {
+                var overflows = track.scrollWidth > track.clientWidth + 2;
+                if (prev) prev.classList.toggle('r-menu-arrow--visible', overflows && track.scrollLeft > 4);
+                if (next) next.classList.toggle('r-menu-arrow--visible', overflows && track.scrollLeft < track.scrollWidth - track.clientWidth - 4);
             }
-            $(window).on('resize', updateNav);
-            updateNav();
+
+            if (prev) prev.addEventListener('click', function () { track.scrollBy({ left: -180, behavior: 'smooth' }); });
+            if (next) next.addEventListener('click', function () { track.scrollBy({ left: 180, behavior: 'smooth' }); });
+
+            track.addEventListener('scroll', updateArrows, { passive: true });
+            window.addEventListener('resize', updateArrows);
+            updateArrows();
         });
     }
 
@@ -104,6 +109,6 @@
     document.addEventListener('DOMContentLoaded', function () {
         initCardClick();
         initShareButtons();
-        initCarousels();
+        initMenuNav();
     });
 })();

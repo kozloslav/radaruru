@@ -25,7 +25,6 @@
         $this->addHead('<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>');
         $this->addHead('<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">');
         $this->addMainTplCSSName(['theme']);
-        $this->addMainTplCSSName(['owl.carousel.min']);
 
 if(!empty($this->options['font_type']) && $this->options['font_type'] === 'gfont') {
             $this->addHead('<link rel="dns-prefetch" href="https://fonts.googleapis.com">');
@@ -35,7 +34,7 @@ if(!empty($this->options['font_type']) && $this->options['font_type'] === 'gfont
             $this->addCSS('https://fonts.googleapis.com/css?family='.$this->options['gfont'].':400,400i,700,700i&display=swap&subset=cyrillic-ext', false);
         }
         $this->addMainTplJSName('jquery', true);
-        $this->addMainTplJSName(['vendors/popper.js/js/popper.min', 'vendors/bootstrap/bootstrap.min', 'vendors/owl/owl.carousel.min']);
+        $this->addMainTplJSName(['vendors/popper.js/js/popper.min', 'vendors/bootstrap/bootstrap.min']);
         $this->onDemandTplJSName(['vendors/photoswipe/photoswipe.min']);
         $this->onDemandTplCSSName(['photoswipe']);
         $this->addMainTplJSName(['core', 'modal', 'site']);
