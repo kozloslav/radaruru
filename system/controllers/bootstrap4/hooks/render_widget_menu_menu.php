@@ -33,8 +33,8 @@ class onBootstrap4RenderWidgetMenuMenu extends cmsAction {
 
         $logos['logo'] = $template->getTemplateFilePath('images/logo.svg');
         $logos['small_logo'] = $template->getTemplateFilePath('images/small_logo.svg');
-        $logos['logo_dark'] = $template->getTemplateFilePath('images/logo-dark-theme.svg');
-        $logos['small_logo_dark'] = $template->getTemplateFilePath('images/small_logo-dark-theme.svg');
+        $logos['logo_dark'] = $template->getTemplateFilePath('images/logo-dark.svg');
+        $logos['small_logo_dark'] = $template->getTemplateFilePath('images/small_logo-dark.svg');
 
         // Растр
         $r_logo_file = $template->getOption('logo');
