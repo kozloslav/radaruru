@@ -12927,9 +12927,15 @@ body,
 }
 
 @media (max-width: 480px) {
-    .card-rating { display: none; }
     .card-media { width: 110px; padding: 7px 0 7px 7px; }
     .card-title { font-size: .84rem; }
+
+    /* Shrink rating widget instead of hiding it */
+    .card-rating .rating_widget { height: 24px; border-radius: 6px; }
+    .card-rating .rating_widget .arrow a,
+    .card-rating .rating_widget .arrow span { width: 22px; height: 24px; }
+    .card-rating .rating_widget .score { height: 24px; min-width: 24px; font-size: .74rem; padding: 0 4px; }
+    .card-rating .rating_widget .arrow svg { width: 10px; height: 10px; }
 }
 
 @media (max-width: 991px) {
