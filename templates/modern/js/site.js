@@ -106,9 +106,63 @@
         });
     }
 
+    /* ---- "Не актуально" button ---- */
+    function initNotActualButtons() {
+        document.querySelectorAll('.r-not-actual-btn').forEach(function (btn) {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                if (btn.classList.contains('is-busy') || btn.disabled) {
+                    return;
+                }
+
+                btn.classList.add('is-busy');
+
+                fetch(btn.dataset.url, {
+                    method: 'POST',
+                    credentials: 'same-origin',
+                    headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                })
+                    .then(function (response) { return response.json(); })
+                    .then(function (result) {
+                        btn.classList.remove('is-busy');
+                        btn.disabled = true;
+                        btn.classList.add('r-not-actual-btn--done');
+                        var span = btn.querySelector('span');
+                        if (span) {
+                            span.textContent = result.message || btn.dataset.sentText;
+                        }
+                    })
+                    .catch(function () {
+                        btn.classList.remove('is-busy');
+                    });
+            });
+        });
+    }
+
+    /* ---- Light/dark theme switcher ---- */
+    function initThemeSwitcher() {
+        var btn = document.getElementById('theme-switcher');
+        if (!btn) return;
+
+        btn.addEventListener('click', function () {
+            var current = document.documentElement.getAttribute('data-theme') || 'light';
+            var next = current === 'dark' ? 'light' : 'dark';
+
+            document.documentElement.setAttribute('data-theme', next);
+
+            try {
+                localStorage.setItem('icms_theme', next);
+            } catch (e) {}
+        });
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
         initCardClick();
         initShareButtons();
         initMenuNav();
+        initNotActualButtons();
+        initThemeSwitcher();
     });
 })();

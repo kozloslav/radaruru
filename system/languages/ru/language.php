@@ -57,6 +57,11 @@
     define('LANG_PHOTOS',                    'Фотографии');
     define('LANG_COMMENTS',                  'Комментарии');
     define('LANG_RATING',                    'Рейтинг');
+    define('LANG_USER_RATING_STATUS_1',      'Новичок');
+    define('LANG_USER_RATING_STATUS_2',      'Местный');
+    define('LANG_USER_RATING_STATUS_3',      'Знаток');
+    define('LANG_USER_RATING_STATUS_4',      'Охотник');
+    define('LANG_USER_RATING_STATUS_5',      'Гуру скидок');
     define('LANG_KARMA',                     'Репутация');
     define('LANG_KARMA_UP',                  'Повысить');
     define('LANG_KARMA_DOWN',                'Понизить');
@@ -673,6 +678,10 @@
     define('LANG_CHOWN_NOTICE_ACCEPT',       'Ваше предложение о передачи прав на &laquo;%s&raquo; было принято пользователем %s.');
     define('LANG_CHOWN_NOTICE_DECLINE',      'Ваше предложение о передачи прав на &laquo;%s&raquo; было отклонено пользователем %s.');
     define('LANG_CHOWN_SUCCESS',             'Вы стали владельцем &laquo;%s&raquo;');
+    define('LANG_CONTENT_NOT_ACTUAL',        'Не актуально');
+    define('LANG_CONTENT_NOT_ACTUAL_SENT',   'Спасибо! Мы сообщили администратору, что это предложение больше не актуально.');
+    define('LANG_CONTENT_NOT_ACTUAL_ALREADY','Вы уже сообщали, что это предложение не актуально');
+    define('LANG_CONTENT_NOT_ACTUAL_NOTICE', '%s сообщил(а), что %s &laquo;%s&raquo; больше не актуально(а). Пожалуйста, проверьте.');
 
     //SEO
     define('LANG_SEO',                       'SEO');

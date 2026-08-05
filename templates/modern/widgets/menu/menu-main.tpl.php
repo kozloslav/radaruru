@@ -18,8 +18,14 @@
             <?php } ?>
             <?php if (!empty($widget->options['toggler_show_logo'])) { ?>
                 <<?php if($core->uri) { ?>a href="<?php echo href_to_home(); ?>"<?php } else { ?>span<?php } ?> class="navbar-brand flex-shrink-0">
-                    <img src="<?php echo $logos['small_logo']; ?>" class="d-sm-none" alt="<?php echo $site_name; ?>">
-                    <img src="<?php echo $logos['logo']; ?>" class="d-none d-sm-block" alt="<?php echo $site_name; ?>">
+                    <span class="site-logo-theme site-logo-theme--light">
+                        <img src="<?php echo $logos['small_logo']; ?>" class="d-sm-none" alt="<?php echo $site_name; ?>">
+                        <img src="<?php echo $logos['logo']; ?>" class="d-none d-sm-block" alt="<?php echo $site_name; ?>">
+                    </span>
+                    <span class="site-logo-theme site-logo-theme--dark">
+                        <img src="<?php echo $logos['small_logo_dark']; ?>" class="d-sm-none" alt="<?php echo $site_name; ?>">
+                        <img src="<?php echo $logos['logo_dark']; ?>" class="d-none d-sm-block" alt="<?php echo $site_name; ?>">
+                    </span>
                     <?php if ($widget->options['toggler_show_sitename']) { ?>
                         <?php echo $site_name; ?>
                     <?php } ?>

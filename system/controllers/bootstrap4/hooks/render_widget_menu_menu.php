@@ -33,6 +33,8 @@ class onBootstrap4RenderWidgetMenuMenu extends cmsAction {
 
         $logos['logo'] = $template->getTemplateFilePath('images/logo.svg');
         $logos['small_logo'] = $template->getTemplateFilePath('images/small_logo.svg');
+        $logos['logo_dark'] = $template->getTemplateFilePath('images/logo-dark-theme.svg');
+        $logos['small_logo_dark'] = $template->getTemplateFilePath('images/small_logo-dark-theme.svg');
 
         // Растр
         $r_logo_file = $template->getOption('logo');
@@ -51,6 +53,15 @@ class onBootstrap4RenderWidgetMenuMenu extends cmsAction {
         $logo_small_svg_file = $template->getOption('logo_small_svg');
         if ($logo_small_svg_file){
             $logos['small_logo'] = $config->upload_root . $logo_small_svg_file['path'];
+        }
+        // SVG (тёмная тема)
+        $logo_svg_dark_file = $template->getOption('logo_svg_dark');
+        if ($logo_svg_dark_file){
+            $logos['logo_dark'] = $config->upload_root . $logo_svg_dark_file['path'];
+        }
+        $logo_small_svg_dark_file = $template->getOption('logo_small_svg_dark');
+        if ($logo_small_svg_dark_file){
+            $logos['small_logo_dark'] = $config->upload_root . $logo_small_svg_dark_file['path'];
         }
 
         $data['core'] = cmsCore::getInstance();

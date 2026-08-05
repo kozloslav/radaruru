@@ -106,7 +106,7 @@
                     </div>
                     <?php if (isset($item['promokod'])) { ?>
                         <a href="#" class="r-promokod" onclick="copyToClipboard(<?php echo $item['id']; ?>); return false;">
-                            <span id="promokod-<?php echo $item['id']; ?>"><?php html_svg_icon('solid', 'copy'); ?><?php echo $item['promokod']; ?></span>
+                            <span id="promokod-<?php echo $item['id']; ?>"><?php html_svg_icon('solid', 'copy'); ?> <?php echo $item['promokod']; ?></span>
                         </a>
                     <?php } ?>
                 </div>

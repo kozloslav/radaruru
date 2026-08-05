@@ -58,6 +58,11 @@
     define('LANG_PHOTOS',                    'Images');
     define('LANG_COMMENTS',                  'Comments');
     define('LANG_RATING',                    'Rating');
+    define('LANG_USER_RATING_STATUS_1',      'Newbie');
+    define('LANG_USER_RATING_STATUS_2',      'Local');
+    define('LANG_USER_RATING_STATUS_3',      'Expert');
+    define('LANG_USER_RATING_STATUS_4',      'Hunter');
+    define('LANG_USER_RATING_STATUS_5',      'Deal Guru');
     define('LANG_KARMA',                     'Reputation');
     define('LANG_KARMA_UP',                  'Vote Up');
     define('LANG_KARMA_DOWN',                'Vote Down');
@@ -674,6 +679,10 @@
     define('LANG_CHOWN_NOTICE_ACCEPT',       'Your proposal to transfer the rights to the &laquo;%s&raquo; was accepted %s');
     define('LANG_CHOWN_NOTICE_DECLINE',      'Your proposal to transfer the rights to the &laquo;%s&raquo; was rejected %s');
     define('LANG_CHOWN_SUCCESS',             'You became the owner of the &laquo;%s&raquo;');
+    define('LANG_CONTENT_NOT_ACTUAL',        'Not relevant');
+    define('LANG_CONTENT_NOT_ACTUAL_SENT',   'Thank you! We have notified the administrator that this offer is no longer relevant.');
+    define('LANG_CONTENT_NOT_ACTUAL_ALREADY','You have already reported this offer as not relevant');
+    define('LANG_CONTENT_NOT_ACTUAL_NOTICE', '%s reported that the %s &laquo;%s&raquo; is no longer relevant. Please check it.');
 
     //SEO
     define('LANG_SEO',                       'SEO');

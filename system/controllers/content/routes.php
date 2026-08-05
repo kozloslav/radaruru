@@ -71,6 +71,12 @@ function routes_content() {
             2           => 'id'
         ],
         [
+            'pattern'   => '/^([a-z0-9\-_]+)\/not_actual\/([0-9]+)$/i',
+            'action'    => 'item_not_actual',
+            1           => 'ctype_name',
+            2           => 'id'
+        ],
+        [
             'pattern'   => '/^([a-z0-9\-_]+)\/approve\/([0-9]+)$/i',
             'action'    => 'item_approve',
             1           => 'ctype_name',

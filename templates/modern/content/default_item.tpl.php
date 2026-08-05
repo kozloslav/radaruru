@@ -62,7 +62,7 @@
                 <?php } ?>
                 <?php if (isset($item['promokod'])) { ?>
                     <a href="#" class="copy-link it-promokod" onclick="copyToClipboard(<?php echo $item['id']; ?>); return false;">
-                        <span id="promokod-<?php echo $item['id']; ?>"><?php html_svg_icon('solid', 'copy'); ?><?php echo $item['promokod']; ?></span>
+                        <span id="promokod-<?php echo $item['id']; ?>"><?php html_svg_icon('solid', 'copy'); ?> <?php echo $item['promokod']; ?></span>
                     </a>
                 <?php } ?>
                 <div class="r-dist-btn r-list-btn ajax-modal"
@@ -72,6 +72,13 @@
                     data-item-id="<?php echo $item['id']; ?>">
                     <span class="r-list-icon"><?php html_svg_icon('solid', 'share'); ?></span>
                 </div>
+                <button type="button" class="r-not-actual-btn"
+                    id="not-actual-btn-<?php echo $item['id']; ?>"
+                    data-url="<?php echo href_to($item['ctype_name'], 'not_actual', [$item['id']]); ?>"
+                    data-sent-text="<?php html(LANG_CONTENT_NOT_ACTUAL_SENT); ?>">
+                    <?php html_svg_icon('solid', 'flag'); ?>
+                    <span><?php echo LANG_CONTENT_NOT_ACTUAL; ?></span>
+                </button>
             </div>
 
         </div>

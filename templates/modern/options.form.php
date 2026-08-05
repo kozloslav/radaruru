@@ -291,6 +291,14 @@ class formModernTemplateOptions extends cmsForm {
                         ]
                     ]),
 
+                    new fieldFile('logo_svg_dark', [
+                        'title' => LANG_MODERN_LOGO_SVG_DARK,
+                        'hint' => LANG_MODERN_LOGO_SVG_DARK_HINT,
+                        'options' => [
+                            'extensions' => 'svg'
+                        ]
+                    ]),
+
                     new fieldImage('logo_small', [
                         'title' => LANG_MODERN_LOGO_SMALL,
                         'hint' => LANG_MODERN_LOGO_SMALL_HINT.LANG_MODERN_RASTR_HINT,
@@ -306,6 +314,14 @@ class formModernTemplateOptions extends cmsForm {
 
                     new fieldFile('logo_small_svg', [
                         'title' => LANG_MODERN_LOGO_SMALL_SVG,
+                        'options' => [
+                            'extensions' => 'svg'
+                        ]
+                    ]),
+
+                    new fieldFile('logo_small_svg_dark', [
+                        'title' => LANG_MODERN_LOGO_SMALL_SVG_DARK,
+                        'hint' => LANG_MODERN_LOGO_SMALL_SVG_DARK_HINT,
                         'options' => [
                             'extensions' => 'svg'
                         ]

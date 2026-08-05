@@ -8,6 +8,15 @@
 <!DOCTYPE html>
 <html <?php echo html_attr_str(($this->layout_params['attr'] ?? []), false); ?>>
     <head>
+        <script nonce="<?php echo $this->nonce; ?>">(function () {
+            try {
+                var theme = localStorage.getItem('icms_theme');
+                if (theme !== 'light' && theme !== 'dark') {
+                    theme = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+                }
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) {}
+        })();</script>
         <title><?php $this->title(); ?></title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -56,6 +65,10 @@ if(!empty($this->options['font_type']) && $this->options['font_type'] === 'gfont
                 <?php html_svg_icon('solid', 'chevron-up'); ?>
             </a>
         <?php } ?>
+        <button type="button" id="theme-switcher" class="position-fixed" title="<?php echo LANG_MODERN_THEME_SWITCH; ?>" aria-label="<?php echo LANG_MODERN_THEME_SWITCH; ?>">
+            <?php html_svg_icon('solid', 'sun', 16, true); ?>
+            <?php html_svg_icon('solid', 'moon', 16, true); ?>
+        </button>
         <?php if (!empty($this->options['show_cookiealert'])){ ?>
             <div class="alert text-center py-3 border-0 rounded-0 m-0 position-fixed fixed-bottom icms-cookiealert" id="icms-cookiealert">
                 <div class="container">

@@ -636,3 +636,46 @@ function html_search_bar($list, $href, $link_class = '', $glue = ', ') {
 function html_tags_bar($tags, $prefix = '', $class = 'tags_bar_link', $glue = ', ') {
     return html_search_bar($tags, href_to('tags') . '/' . ($prefix ? $prefix . '/' : ''), $class, $glue);
 }
+
+/**
+ * Возвращает звание пользователя по величине рейтинга
+ *
+ * @param int $rating
+ * @return array{label: string, class: string}
+ */
+function get_user_rating_status($rating) {
+
+    $rating = (int) $rating;
+
+    if ($rating > 2000) {
+        return ['label' => LANG_USER_RATING_STATUS_5, 'class' => 'rank-5'];
+    } elseif ($rating > 1000) {
+        return ['label' => LANG_USER_RATING_STATUS_4, 'class' => 'rank-4'];
+    } elseif ($rating > 500) {
+        return ['label' => LANG_USER_RATING_STATUS_3, 'class' => 'rank-3'];
+    } elseif ($rating > 100) {
+        return ['label' => LANG_USER_RATING_STATUS_2, 'class' => 'rank-2'];
+    }
+
+    return ['label' => LANG_USER_RATING_STATUS_1, 'class' => 'rank-1'];
+}
+
+/**
+ * Выводит звание пользователя по величине рейтинга
+ *
+ * @param int $rating
+ * @param boolean $print Печатать или возвращать строку
+ */
+function html_user_rating_status($rating, $print = true) {
+
+    $status = get_user_rating_status($rating);
+
+    $html = '<span class="up-rank up-rank--' . $status['class'] . '">' . html($status['label'], false) . '</span>';
+
+    if ($print) {
+        echo $html;
+        return;
+    }
+
+    return $html;
+}

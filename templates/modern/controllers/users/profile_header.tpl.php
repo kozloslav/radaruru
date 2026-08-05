@@ -105,6 +105,7 @@ $user = cmsUser::getInstance();
                             <span class="up-pill__label"><?php echo LANG_RATING; ?></span>
                         </div>
                     </div>
+                    <?php html_user_rating_status($profile['rating']); ?>
                 <?php } ?>
             </div>
         <?php } ?>

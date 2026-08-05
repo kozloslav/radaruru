@@ -58,6 +58,8 @@ class widgetTemplate extends cmsWidget {
 
                 $logos['logo'] = $template->getTemplateFilePath('images/logo.svg');
                 $logos['small_logo'] = $template->getTemplateFilePath('images/small_logo.svg');
+                $logos['logo_dark'] = $template->getTemplateFilePath('images/logo-dark-theme.svg');
+                $logos['small_logo_dark'] = $template->getTemplateFilePath('images/small_logo-dark-theme.svg');
 
                 // Растр
                 $r_logo_file = $template->getOption('logo');
@@ -77,12 +79,23 @@ class widgetTemplate extends cmsWidget {
                 if ($logo_small_svg_file){
                     $logos['small_logo'] = $config->upload_root . $logo_small_svg_file['path'];
                 }
+                // SVG (тёмная тема)
+                $logo_svg_dark_file = $template->getOption('logo_svg_dark');
+                if ($logo_svg_dark_file){
+                    $logos['logo_dark'] = $config->upload_root . $logo_svg_dark_file['path'];
+                }
+                $logo_small_svg_dark_file = $template->getOption('logo_small_svg_dark');
+                if ($logo_small_svg_dark_file){
+                    $logos['small_logo_dark'] = $config->upload_root . $logo_small_svg_dark_file['path'];
+                }
             } else {
 
                 $logos['logo'] = $template->getTemplateFilePath('images/'.$logo_wd['file']);
+                $logos['logo_dark'] = $logos['logo'];
 
                 if(!empty($logo_wd['file_small'])){
                     $logos['small_logo'] = $template->getTemplateFilePath('images/'.$logo_wd['file_small']);
+                    $logos['small_logo_dark'] = $logos['small_logo'];
                 }
             }
 

@@ -46,13 +46,25 @@
 <?php } elseif($widget->options['type'] === 'logo') { ?>
     <?php if($core->uri) { ?>
         <a class="navbar-brand mr-3 flex-shrink-0" href="<?php echo href_to_home(); ?>">
-            <img src="<?php echo $logos['small_logo']; ?>" class="d-sm-none" alt="<?php html($config->sitename); ?>">
-            <img src="<?php echo $logos['logo']; ?>" class="d-none d-sm-block" alt="<?php html($config->sitename); ?>">
+            <span class="site-logo-theme site-logo-theme--light">
+                <img src="<?php echo $logos['small_logo']; ?>" class="d-sm-none" alt="<?php html($config->sitename); ?>">
+                <img src="<?php echo $logos['logo']; ?>" class="d-none d-sm-block" alt="<?php html($config->sitename); ?>">
+            </span>
+            <span class="site-logo-theme site-logo-theme--dark">
+                <img src="<?php echo $logos['small_logo_dark']; ?>" class="d-sm-none" alt="<?php html($config->sitename); ?>">
+                <img src="<?php echo $logos['logo_dark']; ?>" class="d-none d-sm-block" alt="<?php html($config->sitename); ?>">
+            </span>
         </a>
     <?php } else { ?>
         <span class="navbar-brand mr-3 flex-shrink-0">
-            <img src="<?php echo $logos['small_logo']; ?>" class="d-sm-none" alt="<?php html($config->sitename); ?>">
-            <img src="<?php echo $logos['logo']; ?>" class="d-none d-sm-block" alt="<?php html($config->sitename); ?>">
+            <span class="site-logo-theme site-logo-theme--light">
+                <img src="<?php echo $logos['small_logo']; ?>" class="d-sm-none" alt="<?php html($config->sitename); ?>">
+                <img src="<?php echo $logos['logo']; ?>" class="d-none d-sm-block" alt="<?php html($config->sitename); ?>">
+            </span>
+            <span class="site-logo-theme site-logo-theme--dark">
+                <img src="<?php echo $logos['small_logo_dark']; ?>" class="d-sm-none" alt="<?php html($config->sitename); ?>">
+                <img src="<?php echo $logos['logo_dark']; ?>" class="d-none d-sm-block" alt="<?php html($config->sitename); ?>">
+            </span>
         </span>
     <?php } ?>
 <?php } elseif($widget->options['type'] === 'lang_select') { ?>

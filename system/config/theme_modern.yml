@@ -72,16 +72,18 @@ pagination_template: pagination
 js_print_head: null
 logo: null
 logo_svg:
-  id: 108
-  name: logo.svg
-  size: 4366
-  path: 000/u1/1/a/logo.svg
+  id: 2859
+  name: logo-dark-mode-1.svg
+  size: 3069
+  path: 000/u1/5/e/logo-dark-mode-1.svg
+logo_svg_dark: null
 logo_small: null
 logo_small_svg:
   id: 141
   name: logo.svg
   size: 4366
   path: 000/u1/e/0/logo.svg
+logo_small_svg_dark: null
 favicon: null
 head_html_top: ""
 favicon_head_html: ""
