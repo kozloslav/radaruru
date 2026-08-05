@@ -13341,6 +13341,7 @@ html[data-theme="dark"] hr { border-color: #2a323d; }
 html[data-theme="dark"] ::selection { background: #f97316; color: #fff; }
 
 /* ---- Logo ---- */
+.site-logo-theme { display: inline-block; vertical-align: middle; }
 .site-logo-theme--dark { display: none; }
 html[data-theme="dark"] .site-logo-theme--light { display: none; }
 html[data-theme="dark"] .site-logo-theme--dark { display: inline-block; }
