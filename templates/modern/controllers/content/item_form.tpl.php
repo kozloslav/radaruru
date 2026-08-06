@@ -46,13 +46,25 @@
 
 ?>
 
-<h1><?php echo html($page_title) ?></h1>
+<div class="r-content-form">
 
-<?php if ($is_premoderation && !$is_moderator) { ?>
-    <div class="alert alert-info content_moderation_notice">
-        <?php echo LANG_MODERATION_NOTICE; ?>
+    <div class="r-content-form__head">
+        <div class="r-content-form__icon">
+            <?php html_svg_icon('solid', $do == 'edit' ? 'edit' : 'plus-circle', 22); ?>
+        </div>
+        <div class="r-content-form__head-text">
+            <h1 class="r-content-form__title"><?php echo html($page_title) ?></h1>
+            <?php if (!empty($ctype['title'])) { ?>
+                <p class="r-content-form__subtitle"><?php echo html($ctype['title']) ?></p>
+            <?php } ?>
+        </div>
     </div>
-<?php } ?>
+
+    <?php if ($is_premoderation && !$is_moderator) { ?>
+        <div class="alert alert-info content_moderation_notice">
+            <?php echo LANG_MODERATION_NOTICE; ?>
+        </div>
+    <?php } ?>
 
 <?php
     $this->renderForm($form, $item, [
@@ -98,7 +110,9 @@
         </ul>
         <p class="mb-0"><?php echo LANG_CONTENT_PERMS_TIME_HINT1; ?></p>
     </div>
-<?php } ?>
+    <?php } ?>
+
+</div>
 
 <?php ob_start(); ?>
 <script>

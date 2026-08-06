@@ -9,9 +9,18 @@
 <?php } ?>
 
 <?php if(!$is_ajax){ ?>
-    <h1 class="mb-4">
-        <?php $this->pageH1();?>
-    </h1>
+<div class="r-content-form">
+
+    <div class="r-content-form__head">
+        <div class="r-content-form__icon">
+            <?php html_svg_icon('solid', 'sign-in-alt', 22); ?>
+        </div>
+        <div class="r-content-form__head-text">
+            <h1 class="r-content-form__title">
+                <?php $this->pageH1();?>
+            </h1>
+        </div>
+    </div>
 <?php } ?>
 
 <div class="left_cell">
@@ -36,4 +45,7 @@
         <h3><?php echo LANG_LOG_IN_OPENID; ?></h3>
         <?php echo html_each($hooks_html); ?>
     </div>
+<?php } ?>
+<?php if(!$is_ajax){ ?>
+</div>
 <?php } ?>

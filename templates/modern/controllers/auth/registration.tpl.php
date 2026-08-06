@@ -1,15 +1,23 @@
 <?php $this->setPageTitle(LANG_REGISTRATION); ?>
 
 <?php $this->addBreadcrumb(LANG_REGISTRATION); ?>
-<div class="icms-body-toolbox">
-<div class="r-category-title">
-<h1><?php echo LANG_REGISTRATION; ?></h1>
-</div>
-</div>
-<div class="card p-3">
+
+<div class="r-content-form">
+
+    <div class="r-content-form__head">
+        <div class="r-content-form__icon">
+            <?php html_svg_icon('solid', 'user-plus', 22); ?>
+        </div>
+        <div class="r-content-form__head-text">
+            <h1 class="r-content-form__title"><?php echo LANG_REGISTRATION; ?></h1>
+        </div>
+    </div>
+
 <?php if (!$this->controller->options['is_reg_enabled']){ ?>
 
-    <p class="alert alert-warning my-3 my-md-4"><?php echo $this->controller->options['reg_reason']; ?></p>
+    <p class="alert alert-warning mb-0"><?php echo $this->controller->options['reg_reason']; ?></p>
+
+    </div>
     <?php return; ?>
 
 <?php } ?>
@@ -23,6 +31,7 @@
         )
     ), $errors);
 ?>
+
 </div>
 <?php ob_start(); ?>
 <script>

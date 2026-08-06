@@ -142,6 +142,20 @@
     }
 
     /* ---- Light/dark theme switcher ---- */
+    function reinitTinymceEditorsForTheme() {
+        if (typeof tinymce === 'undefined' || typeof init_tinymce !== 'function') return;
+
+        tinymce.editors.slice().forEach(function (editor) {
+            var id = editor.id;
+            var content = editor.getContent();
+
+            tinymce.remove('#' + id);
+            init_tinymce(id, function (newEditor) {
+                newEditor.setContent(content);
+            });
+        });
+    }
+
     function initThemeSwitcher() {
         var btn = document.getElementById('theme-switcher');
         if (!btn) return;
@@ -155,6 +169,8 @@
             try {
                 localStorage.setItem('icms_theme', next);
             } catch (e) {}
+
+            reinitTinymceEditorsForTheme();
         });
     }
 

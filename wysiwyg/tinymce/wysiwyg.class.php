@@ -294,6 +294,19 @@ class cmsWysiwygTinymce {
                             }
                         }
                     });
+                    if ((document.documentElement.getAttribute('data-theme') || 'light') === 'dark') {
+                        var doc = editor.getDoc();
+                        if (doc) {
+                            var dark_style_el = doc.createElement('style');
+                            dark_style_el.textContent = 'html,body{background:#161c24 !important;color:#d7dee7 !important}' +
+                                'a{color:#93c5fd !important}' +
+                                'blockquote{background:#1a212b !important;border-color:#2a323d !important;color:#cbd5e1 !important}' +
+                                'code,pre{background:#1a212b !important;color:#e2e8f0 !important}' +
+                                'table,table td,table th{border-color:#2a323d !important}' +
+                                'hr{border-color:#2a323d !important}';
+                            (doc.head || doc.getElementsByTagName('head')[0]).appendChild(dark_style_el);
+                        }
+                    }
                     if (typeof(callback) === 'function') {
                         callback(editor);
                     }
@@ -307,6 +320,11 @@ class cmsWysiwygTinymce {
                 <?php if($template_css){ ?>
                     tinymce_options.content_css = '<?php echo $template_css; ?>';
                 <?php } ?>
+                if ((document.documentElement.getAttribute('data-theme') || 'light') === 'dark') {
+                    var dark_skin_map = {'oxide': 'oxide-dark', 'tinymce-5': 'tinymce-5-dark'};
+                    var current_skin = tinymce_options.skin || 'oxide';
+                    tinymce_options.skin = dark_skin_map[current_skin] || 'oxide-dark';
+                }
                 tinymce.init(tinymce_options);
                 icms.forms.addWysiwygsInsertPool(dom_id, function(field_element, text){
                     tinymce.activeEditor.setContent(text);
