@@ -11860,7 +11860,7 @@ code {
 
 .r-promo-link--vk:hover {
     background: #4C75A3;
-    color: #fff;
+    color: #fff !important;
     box-shadow: 0 4px 12px rgba(76, 117, 163, 0.3);
 }
 
@@ -11876,7 +11876,7 @@ code {
 
 .r-promo-link--tg:hover {
     background: #0088CC;
-    color: #fff;
+    color: #fff !important;
     box-shadow: 0 4px 12px rgba(0, 136, 204, 0.3);
 }
 
@@ -11892,7 +11892,7 @@ code {
 
 .r-promo-link--max:hover {
     background: #7537e4;
-    color: #fff;
+    color: #fff !important;
     box-shadow: 0 4px 12px rgba(230, 126, 34, 0.3);
 }
 
