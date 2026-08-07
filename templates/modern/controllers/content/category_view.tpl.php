@@ -109,7 +109,7 @@ if (!$is_frontpage){
                     <div class="card border-0 bg-light">
                         <?php if($c['list_params']['cover_img']){ ?>
                             <a class="d-block overflow-hidden rounded-lg" href="<?php echo $c['list_params']['href']; ?>">
-                                <img class="d-block w-100" src="<?php echo $c['list_params']['cover_img']; ?>" alt="<?php html($c['title']); ?>">
+                                <img class="d-block w-100" src="<?php echo $c['list_params']['cover_img']; ?>" alt="<?php html($c['title']); ?>" loading="lazy" decoding="async">
                             </a>
                         <?php } ?>
                         <div class="card-body">

@@ -5,7 +5,7 @@
                 <div class="card border-0">
                     <?php if($item['img_src']){ ?>
                         <a class="d-block overflow-hidden rounded-lg" href="<?php echo href_to($ctype_name, $item['slug']); ?>">
-                            <img class="d-block img-fluid" src="<?php echo $item['img_src']; ?>" alt="<?php html($item['title']); ?>">
+                            <img class="d-block img-fluid" src="<?php echo $item['img_src']; ?>" alt="<?php html($item['title']); ?>" loading="lazy" decoding="async">
                         </a>
                     <?php } ?>
                     <div class="card-body<?php if(!$item['img_src']){ ?> p-0<?php } else { ?> px-0 pb-0 pt-2<?php } ?>">

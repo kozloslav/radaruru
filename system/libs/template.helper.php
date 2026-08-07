@@ -295,7 +295,7 @@ function html_avatar_image($avatars, $size_preset = 'small', $alt = '', $is_html
 
     $src = html_avatar_image_src($avatars, $size_preset);
 
-    $img = '<img class="img-fluid" src="' . $src . '" alt="' . html($alt, false) . '" title="' . html($alt, false) . '">';
+    $img = '<img class="img-fluid" src="' . $src . '" alt="' . html($alt, false) . '" title="' . html($alt, false) . '" loading="lazy" decoding="async">';
 
     if (empty($avatars) && !empty($alt) && $is_html_empty_avatar) {
 
@@ -370,10 +370,12 @@ function html_image($image, $size_preset = 'small', $alt = '', $attributes = [])
         return '';
     }
 
-    $attributes['title'] = $attributes['title'] ?? ($alt ?: false);
-    $attributes['class'] = ($attributes['class'] ?? '') . ' img-fluid';
-    $attributes['src']   = $src;
-    $attributes['alt']   = $alt ?: false;
+    $attributes['title']    = $attributes['title'] ?? ($alt ?: false);
+    $attributes['class']    = ($attributes['class'] ?? '') . ' img-fluid';
+    $attributes['src']      = $src;
+    $attributes['alt']      = $alt ?: false;
+    $attributes['loading']  = $attributes['loading'] ?? 'lazy';
+    $attributes['decoding'] = $attributes['decoding'] ?? 'async';
 
     $image_html = '<img ' . html_attr_str($attributes, false) . '>';
 
@@ -417,7 +419,7 @@ function html_gif_image($image, $size_preset = 'small', $alt = '', $attributes =
     return '<a class="ajax-modal gif_image ' . $class . '" href="' . $original_src . '" ' . html_attr_str($attributes) . '>
                 <span class="background_overlay"></span>
                 <span class="image_label">gif</span>
-                <img class="img-fluid" src="' . $preview_src . '" alt="' . html($alt, false) . '">
+                <img class="img-fluid" src="' . $preview_src . '" alt="' . html($alt, false) . '" loading="lazy" decoding="async">
             </a>';
 }
 

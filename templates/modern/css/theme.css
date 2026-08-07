@@ -13312,6 +13312,42 @@ body,
     color: #334155;
     margin-bottom: 12px;
 }
+
+/* --- Modal windows (ajax modal, alerts, galleries, iframes) --- */
+.modal-content {
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(15,23,42,.22);
+    overflow: hidden;
+}
+.modal-header {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    padding: 18px 24px;
+    border-bottom: 1px solid #f1f5f9;
+}
+.modal-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #1e293b;
+}
+.modal-header .modal-close {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border-radius: 50%;
+    background: #f1f5f9;
+    border: none;
+    color: #64748b;
+    transition: background .15s, color .15s;
+}
+.modal-header .modal-close:hover { background: #e2e8f0; color: #1e293b; }
+.modal-header .modal-close > svg { width: 12px; height: 12px; }
+.modal-body { padding: 22px 24px; }
 /* ============ END UNIFIED IMPROVEMENTS ============ */
 
 /* ============ Main Nav Menu ============ */
@@ -13682,4 +13718,9 @@ html[data-theme="dark"] .r-content-form .center_cell { color: #64748b; }
 html[data-theme="dark"] .r-content-form .center_cell::before,
 html[data-theme="dark"] .r-content-form .center_cell::after { background: #2a323d; }
 html[data-theme="dark"] .r-content-form .right_cell h3 { color: #e2e8f0; }
+
+/* ---- Modal windows ---- */
+html[data-theme="dark"] .modal-content { box-shadow: 0 20px 60px rgba(0,0,0,.55); }
+html[data-theme="dark"] .modal-header .modal-close { background: #232b36; color: #9fb2c7; }
+html[data-theme="dark"] .modal-header .modal-close:hover { background: #2a3441; color: #fff; }
 /* ============ END DARK THEME ============ */
