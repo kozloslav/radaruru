@@ -29,6 +29,9 @@ class onContentFulltextSearch extends cmsAction {
         // Поле изображения
         $images_field = [];
 
+        // Поле описания (для тизера в результатах поиска)
+        $desc_fields = [];
+
         foreach ($ctypes as $ctype) {
 
             // выключено?
@@ -45,21 +48,33 @@ class onContentFulltextSearch extends cmsAction {
 
             foreach ($fields as $field) {
 
+                $is_readable = !$field['is_private'] && (!$field['groups_read'] || $this->cms_user->isInGroups($field['groups_read']));
+
                 // в настройках полей должно быть включено их участие в индексе
                 $is_text = $field['handler']->getOption('in_fulltext_search');
 
-                if ($is_text && !$field['is_private'] && (!$field['groups_read'] || $this->cms_user->isInGroups($field['groups_read']))) {
+                if ($is_text && $is_readable) {
 
                     $match_fields[$ctype['name']][]  = $field['name'];
                     $select_fields[$ctype['name']][] = $field['name'];
                 }
 
                 if (!isset($images_field[$ctype['name']]) && $field['type'] === 'image' &&
-                        !$field['is_private'] && $field['is_in_list'] &&
-                        (!$field['groups_read'] || $this->cms_user->isInGroups($field['groups_read']))) {
+                        $field['is_in_list'] && $is_readable) {
                     $select_fields[$ctype['name']][] = $field['name'];
 
                     $images_field[$ctype['name']] = $field;
+                }
+
+                // берём первое текстовое поле (html/text) как описание для тизера,
+                // даже если оно не участвует в индексации поиска
+                if (!isset($desc_fields[$ctype['name']]) && in_array($field['type'], ['html', 'text'], true) && $is_readable) {
+
+                    if (!in_array($field['name'], $select_fields[$ctype['name']], true)) {
+                        $select_fields[$ctype['name']][] = $field['name'];
+                    }
+
+                    $desc_fields[$ctype['name']] = $field['name'];
                 }
             }
 
@@ -96,7 +111,7 @@ class onContentFulltextSearch extends cmsAction {
             'match_fields'  => $match_fields,
             'select_fields' => $select_fields,
             'filters'       => $filters,
-            'item_callback' => function ($item, $model, $sources_name, $match_fields, $select_fields) use ($_ctypes, $images_field) {
+            'item_callback' => function ($item, $model, $sources_name, $match_fields, $select_fields) use ($_ctypes, $images_field, $desc_fields) {
 
                 $fields = [];
 
@@ -111,13 +126,16 @@ class onContentFulltextSearch extends cmsAction {
                     'name' => $sources_name
                 ];
 
+                $desc_field = $desc_fields[$sources_name] ?? null;
+
                 return array_merge($item, [
-                    'url'      => href_to($sources_name, $item['slug'] . '.html'),
-                    'ctype'    => $_ctypes[$sources_name],
-                    'title'    => $item['title'],
-                    'fields'   => $fields,
-                    'date_pub' => $item['date_pub'],
-                    'image'    => !empty($images_field[$sources_name]) ? $images_field[$sources_name]['handler']->setItem($item)->parseTeaser($item[$images_field[$sources_name]['name']]) : ''
+                    'url'         => href_to($sources_name, $item['slug'] . '.html'),
+                    'ctype'       => $_ctypes[$sources_name],
+                    'title'       => $item['title'],
+                    'fields'      => $fields,
+                    'description' => $desc_field ? ($item[$desc_field] ?? '') : '',
+                    'date_pub'    => $item['date_pub'],
+                    'image'       => !empty($images_field[$sources_name]) ? $images_field[$sources_name]['handler']->setItem($item)->parseTeaser($item[$images_field[$sources_name]['name']]) : ''
                 ]);
             }
         ];

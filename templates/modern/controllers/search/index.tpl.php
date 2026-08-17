@@ -89,20 +89,17 @@
             </div>
 
             <?php
-            $search_raw = html_entity_decode($item['title'], ENT_QUOTES | ENT_HTML5, 'UTF-8');
+            $search_raw = html_entity_decode(strip_tags($item['title']), ENT_QUOTES | ENT_HTML5, 'UTF-8');
             $mob_title = mb_strlen($search_raw, 'UTF-8') > 56
                 ? mb_substr($search_raw, 0, 53, 'UTF-8') . '…'
                 : $search_raw;
             ?>
             <a class="card-title" href="<?php echo $item_url; ?>">
-                <span class="ct-d"><?php echo htmlspecialchars($item['title']); ?></span><span class="ct-m"><?php echo htmlspecialchars($mob_title); ?></span>
+                <span class="ct-d"><?php echo $item['title']; ?></span><span class="ct-m"><?php echo htmlspecialchars($mob_title); ?></span>
             </a>
 
             <?php
-            $desc = '';
-            foreach ($item['fields'] as $value) {
-                if ($value) { $desc = trim(strip_tags($value)); break; }
-            }
+            $desc = trim(strip_tags($item['description'] ?? ''));
             if ($desc) {
                 $trimmed = mb_substr($desc, 0, 120, 'UTF-8');
                 if (mb_strlen($desc, 'UTF-8') > 120) {
