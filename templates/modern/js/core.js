@@ -17,6 +17,7 @@ icms.template = (function ($) {
         this.initScrollTop();
         this.initTooltip();
         this.initCookieAlert();
+        this.initWelcomeModal();
         this.initHeightTextSpoiler();
         this.initInputClickSelect();
         this.initActionConfirm();
@@ -84,6 +85,16 @@ icms.template = (function ($) {
             localStorage.setItem('cookiealert_hide', 1);
             $(block).removeClass('show');
         });
+    };
+
+    this.initWelcomeModal = function(){
+        var block = $('#r-welcome-modal');
+        if($(block).length === 0){ return; }
+        if(localStorage.getItem('welcome_modal_shown')){ return; }
+        localStorage.setItem('welcome_modal_shown', 1);
+        setTimeout(function() {
+            $(block).modal('show');
+        }, 1500);
     };
 
     this.initScrollTop = function(){

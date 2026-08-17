@@ -11930,6 +11930,85 @@ code {
     }
 }
 
+/* ============ Welcome Modal ============ */
+.r-welcome-modal__content {
+    border: none;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.r-welcome-modal__close {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    z-index: 1;
+    font-size: 1.6rem;
+    line-height: 1;
+    color: #94a3b8;
+    text-shadow: none;
+    opacity: 1;
+}
+
+.r-welcome-modal__close:hover {
+    color: #1e293b;
+}
+
+.r-welcome-modal__body {
+    padding: 36px 32px 28px;
+    text-align: center;
+}
+
+.r-welcome-modal__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 16px;
+    background: linear-gradient(135deg, #f8a13c, #f1851c);
+    border-radius: 14px;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(241, 133, 28, 0.35);
+}
+
+.r-welcome-modal__icon svg {
+    width: 26px;
+    height: 26px;
+    fill: #fff;
+}
+
+.r-welcome-modal__title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 10px;
+}
+
+.r-welcome-modal__text {
+    font-size: 0.92rem;
+    color: #64748b;
+    line-height: 1.5;
+    margin-bottom: 22px;
+}
+
+.r-welcome-modal__links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.r-promo-link--lg {
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+}
+
+html[data-theme="dark"] .r-welcome-modal__close { color: #64748b; }
+html[data-theme="dark"] .r-welcome-modal__close:hover { color: #e2e8f0; }
+html[data-theme="dark"] .r-welcome-modal__title { color: #e2e8f0; }
+html[data-theme="dark"] .r-welcome-modal__text { color: #94a3b8; }
+
 /* ============ Base typography ============ */
 
 body,

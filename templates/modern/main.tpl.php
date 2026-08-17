@@ -79,6 +79,32 @@ if(!empty($this->options['font_type']) && $this->options['font_type'] === 'gfont
                 </div>
             </div>
         <?php } ?>
+        <div class="modal fade r-welcome-modal" id="r-welcome-modal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content r-welcome-modal__content">
+                    <button type="button" class="close r-welcome-modal__close" data-dismiss="modal" aria-label="Закрыть">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="modal-body r-welcome-modal__body">
+                        <div class="r-welcome-modal__icon">
+                            <?php html_svg_icon('solid', 'fire', 28); ?>
+                        </div>
+                        <h4 class="r-welcome-modal__title">Выгодные предложения разбирают очень быстро</h4>
+                        <p class="r-welcome-modal__text">Лучшие скидки и промокоды на Radaru часто исчезают уже через несколько часов после публикации. Чтобы не упустить выгоду, подпишитесь на наши каналы — там мы публикуем новые предложения первыми.</p>
+                        <div class="r-welcome-modal__links">
+                            <a href="https://max.ru/channel_radaru" class="r-promo-link r-promo-link--max r-promo-link--lg" target="_blank" rel="nofollow noopener">
+                                <?php html_svg_icon('my', 'max', 16); ?>
+                                <span>Подписаться в MAX</span>
+                            </a>
+                            <a href="https://t.me/radarupub" class="r-promo-link r-promo-link--tg r-promo-link--lg" target="_blank" rel="nofollow noopener">
+                                <?php html_svg_icon('brands', 'telegram-plane', 16); ?>
+                                <span>Подписаться в Telegram</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div id="copy-message">Промокод скопирован в буфер обмена!</div>
 
         <?php if ($config->debug && cmsUser::isAdmin()){ ?>
