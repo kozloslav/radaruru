@@ -214,6 +214,28 @@ class auth extends cmsFrontend {
             ]));
         }
 
+        // Согласие с правилами сайта
+        $fieldset_id = $form->addFieldset('', 'agreerules');
+
+        $form->addField($fieldset_id, new fieldCheckbox('agree_rules', [
+            'title'   => 'Я принимаю условия {link1} и {link2}',
+            'options' => [
+                'urls' => [
+                    [
+                        'title' => 'Пользовательского соглашения',
+                        'href'  => 'pages/agreement.html'
+                    ],
+                    [
+                        'title' => 'Политики конфиденциальности',
+                        'href'  => 'pages/privacy.html'
+                    ]
+                ]
+            ],
+            'rules' => [
+                ['required']
+            ]
+        ]));
+
         return cmsEventsManager::hook('form_auth_registration_full', [$form, $fieldsets]);
     }
 
