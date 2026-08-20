@@ -76,7 +76,7 @@
                 <?php if (!empty($item['image'])){ ?>
                     <a href="<?php echo $item_url; ?>"><?php echo $item['image']; ?></a>
                 <?php } ?>
-                <?php if ($is_inactive) { ?><div class="r-img__inactive-overlay">не активно</div><?php } ?>
+                <?php if ($is_inactive) { ?><div class="r-img__inactive-overlay">не актуально</div><?php } ?>
             </div>
         </div>
 

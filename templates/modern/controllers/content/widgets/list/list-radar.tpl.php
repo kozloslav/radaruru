@@ -33,7 +33,7 @@
             <div class="r-img">
                 <?php if (isset($item['fields']['photo'])) { echo $item['fields']['photo']['html']; } ?>
                 <?php if (isset($item['is_pub']) && $item['is_pub'] < 1) { ?>
-                    <div class="r-img__inactive-overlay">не активно</div>
+                    <div class="r-img__inactive-overlay">не актуально</div>
                 <?php } ?>
             </div>
         </div>

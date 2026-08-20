@@ -4,7 +4,7 @@
 
     // Добавляем класс для неактивных постов
     if (isset($item['is_pub']) && $item['is_pub'] < 1) {
-        $this->addHead('<style>.content_item_wrap { position: relative; } .content_item_wrap.item--inactive .r-img { position: relative; } .content_item_wrap.item--inactive .r-img img { filter: grayscale(100%); opacity: 0.7; } .content_item_wrap.item--inactive::after { content: "НЕ АКТИВНО"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.7); color: #fff; padding: 15px 30px; font-size: 18px; font-weight: bold; border-radius: 8px; z-index: 100; pointer-events: none; }</style>');
+        $this->addHead('<style>.content_item_wrap.item--inactive .r-img { position: relative; } .content_item_wrap.item--inactive .r-img img { filter: grayscale(100%); opacity: 0.7; } .content_item_wrap.item--inactive .r-img::after { content: "НЕ АКТУАЛЬНО"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.7); color: #fff; padding: 10px 20px; font-size: 16px; font-weight: bold; border-radius: 8px; z-index: 100; pointer-events: none; text-align: center; white-space: nowrap; }</style>');
     }
 
     // === Open Graph / Twitter Card / SEO ===
