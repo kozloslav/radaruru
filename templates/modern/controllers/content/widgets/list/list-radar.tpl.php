@@ -16,7 +16,7 @@
                     <svg class="icms-svg-icon w-16" fill="currentColor"><use href="/templates/modern/images/icons/brands.svg?1762180292#telegram-plane"></use></svg>
                     <span>Telegram</span>
                 </a>
-                <a href="https://max.ru/channel_radaru" class="r-promo-link r-promo-link--max" target="_blank" rel="nofollow noopener">
+                <a href="https://max.ru/join/yL0vwgQCfCJWNol5OQtyI6AolA0d165ZXk61GW1e22w" class="r-promo-link r-promo-link--max" target="_blank" rel="nofollow noopener">
                     <svg class="icms-svg-icon w-16" fill="currentColor"><use href="/templates/modern/images/icons/my.svg?1762180292#max"></use></svg>
                     <span>MAX</span>
                 </a>

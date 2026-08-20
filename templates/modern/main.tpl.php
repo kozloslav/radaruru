@@ -92,7 +92,7 @@ if(!empty($this->options['font_type']) && $this->options['font_type'] === 'gfont
                         <h4 class="r-welcome-modal__title">Выгодные предложения разбирают очень быстро</h4>
                         <p class="r-welcome-modal__text">Лучшие скидки и промокоды на Radaru часто исчезают уже через несколько часов после публикации. Чтобы не упустить выгоду, подпишитесь на наши каналы — там мы публикуем новые предложения первыми.</p>
                         <div class="r-welcome-modal__links">
-                            <a href="https://max.ru/channel_radaru" class="r-promo-link r-promo-link--max r-promo-link--lg" target="_blank" rel="nofollow noopener">
+                            <a href="https://max.ru/join/yL0vwgQCfCJWNol5OQtyI6AolA0d165ZXk61GW1e22w" class="r-promo-link r-promo-link--max r-promo-link--lg" target="_blank" rel="nofollow noopener">
                                 <?php html_svg_icon('my', 'max', 16); ?>
                                 <span>Подписаться в MAX</span>
                             </a>
